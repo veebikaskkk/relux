@@ -1,4 +1,4 @@
-/* Relux Transport — väike skript: aastanumber, päringuvorm (mailto) ja pildivaade. */
+/* Relux Transport. Väike skript: aastanumber, päringuvorm (mailto) ja pildivaade. */
 (function () {
   'use strict';
 
@@ -25,7 +25,7 @@
       };
 
       var teenus = v('teenus') || 'Transporditeenus';
-      var subject = 'Päring: ' + teenus + (v('nimi') ? ' — ' + v('nimi') : '');
+      var subject = 'Päring: ' + teenus + (v('nimi') ? ', ' + v('nimi') : '');
 
       var read = [
         ['Nimi', v('nimi')],
@@ -49,8 +49,8 @@
       if (status) {
         status.hidden = false;
         status.innerHTML =
-          '<strong>Kiri on koostatud.</strong> Sinu e-posti rakendus peaks avanema — vajuta seal veel „Saada”.' +
-          '<br>Kui rakendus ei avanenud, kirjuta meile <a href="mailto:' + AADRESS + '" style="color:inherit">' + AADRESS + '</a> ' +
+          '<strong>Kiri on koostatud.</strong> Sinu e-posti rakendus peaks avanema, seal tuleb veel „Saada” vajutada.' +
+          '<br>Kui rakendus ei avanenud, kirjuta meile aadressil <a href="mailto:' + AADRESS + '" style="color:inherit">' + AADRESS + '</a> ' +
           'või helista <a href="tel:+37258512124" style="color:inherit">+372 5851 2124</a>.' +
           '<br><button type="button" id="kopeeriParing">Kopeeri päringu tekst lõikelauale</button>';
 
@@ -73,7 +73,7 @@
       try {
         window.location.href = href;
       } catch (err) {
-        /* mõni brauser blokeerib mailto: — kasutaja saab teksti kopeerida */
+        /* mõni brauser blokeerib mailto-lingi, siis saab kasutaja teksti kopeerida */
       }
     });
   }
@@ -118,7 +118,7 @@
 
   function close() {
     lb.classList.remove('is-open');
-    lbImg.src = '';
+    lbImg.removeAttribute('src');
     document.body.style.overflow = '';
     if (lastFocus) lastFocus.focus();
   }
